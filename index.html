@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        #box {
+            width: 800px;
+            height: 500px;
+            background: url(月亮.jpg) no-repeat;
+            background-size: 800px 500px;
+            position: relative;
+        }
+        #fuzzy-Area {
+            position: absolute;
+            width: 100px;
+            height:100px;
+            background-color: red;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="fuzzy-Area" style="display: none"></div>
+</div>
+</body>
+<script>
+    $('#box').mouseover(function (e) {
+        $('#fuzzy-Area').css('display','block')
+    })
+    var div=$('#fuzzy-Area')[0]
+    $('#fuzzy-Area').mousedown(function (e) {
+        var x1 = e.clientX;
+        var y1 = e.clientY;
+
+        var l = div.offsetLeft;
+        var t = div.offsetTop;
+        //给可视区域添加鼠标的移动事件
+        document.onmousemove = function(ev) {
+
+            //event的兼容性
+            var ev = ev || event;
+
+            //获取鼠标移动时的坐标
+            var x2 = ev.clientX;
+            var y2 = ev.clientY;
+            console.log(y2)
+            //更改元素的left，top值
+            div.style.left=x2-50+"px"
+            div.style.top=y2-50+"px"
+            if(x2>750){
+                div.style.left=700+"px"
+            }
+            if(y2>450){
+                div.style.top=400+"px"
+            }
+            if(x2<50){
+                div.style.left=0+"px"
+            }
+            if(y2<50){
+                div.style.top=0+"px"
+            }
+        }
+    })
+
+</script>
+</html>
